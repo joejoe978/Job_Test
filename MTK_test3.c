@@ -11,19 +11,15 @@ Node *tmp1,*tmp2,*tmp3,*tmp4,*head;
 
 Node* reverseLinklist(Node *first){
     if(!first) return NULL;
-    if(!first->next) return first;
+    Node *pre = NULL;
 
-    Node *pre = NULL, *future = first->next;
-
-    while(first->next!=NULL && first->next->next!=NULL){
+    while(first){
+        Node *future = first->next;
         first->next = pre;
         pre = first;
         first = future;
-        future = future->next;
     }
-    first->next = pre;
-    future->next = first;
-    return future;
+    return pre;
 }
 void print(Node *first){
     //if (first==NULL) return NULL;
@@ -44,13 +40,13 @@ int main(){
 
     head = tmp1;
     tmp1->val = 1;
-    tmp1->next = NULL;
-    //tmp2->val = 2;
-    //tmp2->next = NULL;
-    //tmp3->val = 3;
-    //tmp3->next = tmp4;
-    //tmp4->val = 4;
-    //tmp4->next = NULL;
+    tmp1->next = tmp2;
+    tmp2->val = 2;
+    tmp2->next = tmp3;
+    tmp3->val = 3;
+    tmp3->next = tmp4;
+    tmp4->val = 4;
+    tmp4->next = NULL;
     print(head);
 
     Node *newhead = reverseLinklist(head);
